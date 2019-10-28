@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gevlee.CompanyViewer.WebApi", "Gevlee.CompanyViewer.WebApi\Gevlee.CompanyViewer.WebApi.csproj", "{7E49061D-970E-4AB1-9335-FC7ADF0D411D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gevlee.CompanyViewer.Core", "Gevlee.CompanyViewer.Core\Gevlee.CompanyViewer.Core.csproj", "{1A040138-AA33-46D9-BBF8-2D2334084393}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E49061D-970E-4AB1-9335-FC7ADF0D411D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E49061D-970E-4AB1-9335-FC7ADF0D411D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E49061D-970E-4AB1-9335-FC7ADF0D411D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E49061D-970E-4AB1-9335-FC7ADF0D411D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A040138-AA33-46D9-BBF8-2D2334084393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A040138-AA33-46D9-BBF8-2D2334084393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A040138-AA33-46D9-BBF8-2D2334084393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A040138-AA33-46D9-BBF8-2D2334084393}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27A60722-2C7D-42C3-B4CF-4A5B0446C7CE}
+	EndGlobalSection
+EndGlobal
