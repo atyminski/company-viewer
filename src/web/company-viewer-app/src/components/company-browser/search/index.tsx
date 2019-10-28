@@ -36,7 +36,7 @@ export const SearchCompany: React.FC<Props> = (props) => {
             <Paper className={classes.root}>
                 <InputBase
                     className={classes.input}
-                    placeholder="Type NIP, REGON or KRS"
+                    placeholder="NIP/KRS/REGON"
                 />
                 <IconButton className={classes.iconButton} aria-label="search">
                     <SearchIcon />
