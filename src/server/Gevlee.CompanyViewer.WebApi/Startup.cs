@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using Gevlee.CompanyViewer.Core;
+using Gevlee.CompanyViewer.WebApi.Common.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +22,14 @@ namespace Gevlee.CompanyViewer.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCore(Configuration);
-            services.AddControllers();
+            services.AddControllers(options =>
+                    {
+                        options.Filters.Add(new ModelStateFilter());
+                    }).AddFluentValidation(fv =>
+                        {
+                            fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+                            fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
