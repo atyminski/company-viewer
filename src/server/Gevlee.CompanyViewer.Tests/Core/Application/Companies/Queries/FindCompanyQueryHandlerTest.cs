@@ -44,7 +44,7 @@ namespace Gevlee.CompanyViewer.Tests.Application.Companies.Queries
                 Name = "Test Company 1",
                 Address = new Address(),
                 NationalBusinessRegistryNumber = "715382844",
-                NationalCourtRegister = "0000111111",
+                NationalCourtRegisterNumber = "0000111111",
                 TaxNumber = "1579330179",
             });
             DbContext.Add(new Company
@@ -53,7 +53,7 @@ namespace Gevlee.CompanyViewer.Tests.Application.Companies.Queries
                 Name = "Test Company 2",
                 Address = new Address(),
                 NationalBusinessRegistryNumber = "536849520",
-                NationalCourtRegister = "0000111112",
+                NationalCourtRegisterNumber = "0000111112",
                 TaxNumber = "1196395597",
             });
             DbContext.SaveChanges();

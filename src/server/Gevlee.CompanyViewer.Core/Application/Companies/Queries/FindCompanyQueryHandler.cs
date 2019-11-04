@@ -24,7 +24,7 @@ namespace Gevlee.CompanyViewer.Core.Application.Companies.Queries
                 .Where(c => 
                     c.TaxNumber.Contains(preparedPhrase) ||
                     c.NationalBusinessRegistryNumber.Contains(preparedPhrase) ||
-                    c.NationalCourtRegister.Contains(preparedPhrase))
+                    c.NationalCourtRegisterNumber.Contains(preparedPhrase))
                 .Include(x => x.Address)
                 .Select(x => new FoundCompany(){
                     Street = x.Address.Street,

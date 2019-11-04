@@ -8,19 +8,22 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Company> builder)
         {
+            builder.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(255);
             builder.Property(x => x.TaxNumber)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(10);
             builder.Property(x => x.NationalBusinessRegistryNumber)
-                .HasColumnName("nbrn")
-                //.HasComment("National Business Registry Number")
+                .HasMaxLength(9)
                 .IsRequired();
-            builder.Property(x => x.NationalCourtRegister)
-                .HasColumnName("ncr")
-                //.HasComment("National Court Register")
+            builder.Property(x => x.NationalCourtRegisterNumber)
+                .HasMaxLength(9)
                 .IsRequired();
+
             builder.HasIndex(x => x.TaxNumber);
             builder.HasIndex(x => x.NationalBusinessRegistryNumber);
-            builder.HasIndex(x => x.NationalCourtRegister);
+            builder.HasIndex(x => x.NationalCourtRegisterNumber);
         }
     }
 }

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PostgresCompaniesDbContext))]
-    [Migration("20191030200017_Initial")]
-    partial class Initial
+    [Migration("20191104181348_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,22 +36,26 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnName("city")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()
                         .HasColumnName("house_number")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnName("postal_code")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnName("street")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id")
                         .HasName("pk_address");
@@ -71,20 +75,29 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                         .HasColumnName("address_id")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("name")
+                        .HasColumnType("character varying(255)")
+                        .HasMaxLength(255);
+
                     b.Property<string>("NationalBusinessRegistryNumber")
                         .IsRequired()
                         .HasColumnName("national_business_registry_number")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(9)")
+                        .HasMaxLength(9);
 
-                    b.Property<string>("NationalCourtRegister")
+                    b.Property<string>("NationalCourtRegisterNumber")
                         .IsRequired()
-                        .HasColumnName("national_court_register")
-                        .HasColumnType("text");
+                        .HasColumnName("national_court_register_number")
+                        .HasColumnType("character varying(9)")
+                        .HasMaxLength(9);
 
                     b.Property<string>("TaxNumber")
                         .IsRequired()
                         .HasColumnName("tax_number")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(10)")
+                        .HasMaxLength(10);
 
                     b.HasKey("Id")
                         .HasName("pk_company");
@@ -95,8 +108,8 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                     b.HasIndex("NationalBusinessRegistryNumber")
                         .HasName("ix_company_national_business_registry_number");
 
-                    b.HasIndex("NationalCourtRegister")
-                        .HasName("ix_company_national_court_register");
+                    b.HasIndex("NationalCourtRegisterNumber")
+                        .HasName("ix_company_national_court_register_number");
 
                     b.HasIndex("TaxNumber")
                         .HasName("ix_company_tax_number");
@@ -106,15 +119,24 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Gevlee.CompanyViewer.Core.Domain.Entities.CompanySearchRequest", b =>
                 {
+                    b.Property<string>("Ip")
+                        .HasColumnName("ip")
+                        .HasColumnType("character varying(15)")
+                        .HasMaxLength(15);
+
                     b.Property<string>("RequestData")
                         .IsRequired()
                         .HasColumnName("request_data")
-                        .HasColumnType("text");
+                        .HasColumnType("jsonb");
 
                     b.Property<string>("SearchPhrase")
                         .IsRequired()
                         .HasColumnName("search_phrase")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnName("timestamp")
+                        .HasColumnType("timestamp without time zone");
 
                     b.ToTable("company_search_request");
                 });

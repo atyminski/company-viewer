@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +14,11 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    street = table.Column<string>(nullable: false),
-                    house_number = table.Column<string>(nullable: false),
+                    street = table.Column<string>(maxLength: 100, nullable: false),
+                    house_number = table.Column<string>(maxLength: 10, nullable: false),
                     appartment_number = table.Column<string>(nullable: true),
-                    postal_code = table.Column<string>(nullable: false),
-                    city = table.Column<string>(nullable: false)
+                    postal_code = table.Column<string>(maxLength: 10, nullable: false),
+                    city = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,9 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     search_phrase = table.Column<string>(nullable: false),
-                    request_data = table.Column<string>(nullable: false)
+                    request_data = table.Column<string>(type: "jsonb", nullable: false),
+                    timestamp = table.Column<DateTime>(nullable: false),
+                    ip = table.Column<string>(maxLength: 15, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,9 +44,10 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    tax_number = table.Column<string>(nullable: false),
-                    national_business_registry_number = table.Column<string>(nullable: false),
-                    national_court_register = table.Column<string>(nullable: false),
+                    name = table.Column<string>(maxLength: 255, nullable: false),
+                    tax_number = table.Column<string>(maxLength: 10, nullable: false),
+                    national_business_registry_number = table.Column<string>(maxLength: 9, nullable: false),
+                    national_court_register_number = table.Column<string>(maxLength: 9, nullable: false),
                     address_id = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -68,9 +72,9 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                 column: "national_business_registry_number");
 
             migrationBuilder.CreateIndex(
-                name: "ix_company_national_court_register",
+                name: "ix_company_national_court_register_number",
                 table: "company",
-                column: "national_court_register");
+                column: "national_court_register_number");
 
             migrationBuilder.CreateIndex(
                 name: "ix_company_tax_number",

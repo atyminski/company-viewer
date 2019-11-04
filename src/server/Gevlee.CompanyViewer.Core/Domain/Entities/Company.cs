@@ -10,7 +10,7 @@
 
         public string NationalBusinessRegistryNumber { get; set; }
 
-        public string NationalCourtRegister { get; set; }
+        public string NationalCourtRegisterNumber { get; set; }
 
         public Address Address { get; set; }
     }

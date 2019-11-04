@@ -3,15 +3,17 @@ using System;
 using Gevlee.CompanyViewer.Core.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PostgresCompaniesDbContext))]
-    partial class PostgresCompaniesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191104181615_FixSomeColumns")]
+    partial class FixSomeColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,28 +64,6 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                     b.ToTable("address");
                 });
 
-            modelBuilder.Entity("Gevlee.CompanyViewer.Core.Domain.Entities.ApiRequest", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnName("id")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("RequestData")
-                        .IsRequired()
-                        .HasColumnName("request_data")
-                        .HasColumnType("jsonb");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnName("timestamp")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id")
-                        .HasName("pk_api_request");
-
-                    b.ToTable("api_request");
-                });
-
             modelBuilder.Entity("Gevlee.CompanyViewer.Core.Domain.Entities.Company", b =>
                 {
                     b.Property<int>("Id")
@@ -106,12 +86,14 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnName("national_business_registry_number")
                         .HasColumnType("character varying(9)")
+                        .HasComment("National Business Registry Number")
                         .HasMaxLength(9);
 
                     b.Property<string>("NationalCourtRegisterNumber")
                         .IsRequired()
                         .HasColumnName("national_court_register_number")
                         .HasColumnType("character varying(9)")
+                        .HasComment("National Court Register Number")
                         .HasMaxLength(9);
 
                     b.Property<string>("TaxNumber")
@@ -136,6 +118,30 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                         .HasName("ix_company_tax_number");
 
                     b.ToTable("company");
+                });
+
+            modelBuilder.Entity("Gevlee.CompanyViewer.Core.Domain.Entities.CompanySearchRequest", b =>
+                {
+                    b.Property<string>("Ip")
+                        .HasColumnName("ip")
+                        .HasColumnType("character varying(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<string>("RequestData")
+                        .IsRequired()
+                        .HasColumnName("request_data")
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("SearchPhrase")
+                        .IsRequired()
+                        .HasColumnName("search_phrase")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnName("timestamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.ToTable("company_search_request");
                 });
 
             modelBuilder.Entity("Gevlee.CompanyViewer.Core.Domain.Entities.Company", b =>

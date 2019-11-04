@@ -3,6 +3,7 @@ using Gevlee.CompanyViewer.Core;
 using Gevlee.CompanyViewer.WebApi.Common.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,9 +23,11 @@ namespace Gevlee.CompanyViewer.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCore(Configuration);
+            services.AddScoped<RequestLoggingFilter>();
+
             services.AddControllers(options =>
                     {
-                        options.Filters.Add(new ModelStateFilter());
+                        options.Filters.Add(typeof(RequestLoggingFilter));
                     }).AddFluentValidation(fv =>
                         {
                             fv.RegisterValidatorsFromAssemblyContaining<Startup>();

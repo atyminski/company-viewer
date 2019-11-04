@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Gevlee.CompanyViewer.Core.Application.Companies.Queries;
+using Gevlee.CompanyViewer.WebApi.Common.Filters;
 using Gevlee.CompanyViewer.WebApi.Companies.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -3,15 +3,17 @@ using System;
 using Gevlee.CompanyViewer.Core.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PostgresCompaniesDbContext))]
-    partial class PostgresCompaniesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191104182348_AlterRequestLogging")]
+    partial class AlterRequestLogging
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,10 +66,10 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Gevlee.CompanyViewer.Core.Domain.Entities.ApiRequest", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnName("id")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                    b.Property<string>("Ip")
+                        .HasColumnName("ip")
+                        .HasColumnType("character varying(15)")
+                        .HasMaxLength(15);
 
                     b.Property<string>("RequestData")
                         .IsRequired()
@@ -77,9 +79,6 @@ namespace Gevlee.CompanyViewer.Core.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("Timestamp")
                         .HasColumnName("timestamp")
                         .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id")
-                        .HasName("pk_api_request");
 
                     b.ToTable("api_request");
                 });
