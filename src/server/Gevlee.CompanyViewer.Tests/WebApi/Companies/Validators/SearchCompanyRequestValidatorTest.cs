@@ -20,7 +20,7 @@ namespace Gevlee.CompanyViewer.Tests.WebApi.Companies.Validators
         [InlineData("PL417-481-35-40")]
         [InlineData("PL-417-481-35-40")]
         [InlineData("230238628")]
-        public async void Validation_ShouldPass_IfObjectIsValid(string phrase)
+        public void Validation_ShouldPass_IfObjectIsValid(string phrase)
         {
             Validator.ShouldNotHaveValidationErrorFor(request => request.SearchPhrase, phrase);
         }
@@ -29,7 +29,7 @@ namespace Gevlee.CompanyViewer.Tests.WebApi.Companies.Validators
         [InlineData("41748135")]
         [InlineData("PLN4174813540")]
         [InlineData("417-481-354-0")]
-        public async void Validation_ShouldFail_IfObjectIsInvalid(string phrase)
+        public void Validation_ShouldFail_IfObjectIsInvalid(string phrase)
         {
             Validator.ShouldHaveValidationErrorFor(request => request.SearchPhrase, phrase);
         }

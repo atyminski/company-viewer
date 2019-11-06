@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
-import { Paper, IconButton, InputBase, Divider, Theme } from '@material-ui/core';
+import { Paper, IconButton, InputBase, Divider, Theme, TextField } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
@@ -31,17 +31,31 @@ interface Props {
 
 export const SearchCompany: React.FC<Props> = (props) => {
     const classes = useStyles();
+    const handleChange = (value: any) => {
+
+    }
+    const handleClick = () => {
+
+    }
     return (
         <div className={classes.container}>
             <Paper className={classes.root}>
-                <InputBase
+                {/* <InputBase
+                    error
                     className={classes.input}
                     placeholder="NIP/KRS/REGON"
-                />
-                <IconButton className={classes.iconButton} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
+                    onChange={(p) => {handleChange(p.currentTarget.value)}}
+                /> */}
             </Paper>
+            <TextField
+                label="NIP/KRS/REGON"
+                // helperText="Incorrect entry."
+                margin="normal"
+                variant="outlined"
+                />
+                {/* <IconButton className={classes.iconButton} aria-label="search">
+                    <SearchIcon />
+                </IconButton> */}
         </div>
     )
 }
