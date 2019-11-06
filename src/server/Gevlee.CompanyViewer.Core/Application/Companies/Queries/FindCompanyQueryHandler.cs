@@ -14,21 +14,27 @@ namespace Gevlee.CompanyViewer.Core.Application.Companies.Queries
 
         public FindCompanyQueryHandler(CompaniesDbContext dbContext)
         {
-            this.dbContext = dbContext; //TODO: Maybe interface???
+            this.dbContext = dbContext;
         }
 
         public Task<FoundCompany> Handle(FindCompanyQuery query, CancellationToken cancellationToken)
         {
             var preparedPhrase = MakePhraseQueryFriendly(query.SearchPhrase);
             var result = dbContext.Set<Company>()
-                .Where(c => 
-                    c.TaxNumber.Contains(preparedPhrase) ||
-                    c.NationalBusinessRegistryNumber.Contains(preparedPhrase) ||
-                    c.NationalCourtRegisterNumber.Contains(preparedPhrase))
+                .Where(c =>
+                    c.TaxNumber == preparedPhrase ||
+                    c.NationalBusinessRegistryNumber == preparedPhrase ||
+                    c.NationalCourtRegisterNumber == preparedPhrase)
                 .Include(x => x.Address)
-                .Select(x => new FoundCompany(){
+                .Select(x => new FoundCompany
+                {
+                    Id = x.Id,
+                    Name = x.Name,
                     Street = x.Address.Street,
-                    Id = x.Id
+                    HouseNumber = x.Address.HouseNumber,
+                    AppartmentNumber = x.Address.AppartmentNumber,
+                    PostalCode = x.Address.PostalCode,
+                    City = x.Address.City,
                 })
                 .FirstOrDefault();
              

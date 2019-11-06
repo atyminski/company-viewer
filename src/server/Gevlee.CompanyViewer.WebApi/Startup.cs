@@ -43,7 +43,9 @@ namespace Gevlee.CompanyViewer.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors((config) => {
+                config.AllowAnyOrigin();
+            });
 
             app.UseRouting();
 
