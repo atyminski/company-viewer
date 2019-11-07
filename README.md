@@ -4,6 +4,9 @@
 docker-compose up --build
 ``
 
+then go to WebUI: http://localhost:5665
+
+
 ## Test data
 
 |NIP|REGON|KRS|
