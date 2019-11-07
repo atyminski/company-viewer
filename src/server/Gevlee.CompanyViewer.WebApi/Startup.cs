@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using Gevlee.CompanyViewer.Core;
+using Gevlee.CompanyViewer.WebApi.Common.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Gevlee.CompanyViewer.WebApi
 {
@@ -25,7 +22,17 @@ namespace Gevlee.CompanyViewer.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddCore(Configuration);
+            services.AddScoped<RequestLoggingFilter>();
+
+            services.AddControllers(options =>
+                    {
+                        options.Filters.Add(typeof(RequestLoggingFilter));
+                    }).AddFluentValidation(fv =>
+                        {
+                            fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+                            fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +43,9 @@ namespace Gevlee.CompanyViewer.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors((config) => {
+                config.AllowAnyOrigin();
+            });
 
             app.UseRouting();
 
