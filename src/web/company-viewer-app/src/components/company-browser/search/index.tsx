@@ -54,7 +54,7 @@ export const SearchCompany: React.FC<Props> = (props) => {
     }
 
     const handleSearch = async (value: string) => {
-        var response = await fetch(settings.API_URL+'/companies/find?searchPhrase='+value)
+        var response = await fetch(settings.REACT_APP_API_URL+'/companies/find?searchPhrase='+value)
         if(response.ok){
             if(response.status === 200) {
                 var result = await response.json()
